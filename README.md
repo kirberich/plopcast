@@ -60,7 +60,7 @@ The available variables that can be used for formatting are:
   * %S - second
   
 ### Modification times
-If you don't want the files to given a modification time matching the episode publishing date, and instead be the time when the file was downloaded, psas `--no-set-modification-time`
+If you don't want the files to given a modification time matching the episode publishing date, and instead be the time when the file was downloaded, pass `--no-set-modification-time`
 
 ## Excluded features
 * Plopcast only ever downloads a single feed - for multiple feeds, simply run the command multiple times, for example from a script or a cronjob
