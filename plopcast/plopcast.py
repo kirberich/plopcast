@@ -7,9 +7,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urlparse
 
-import eyed3
 import requests
-from eyed3.id3 import Tag
+from mutagen.easyid3 import EasyID3
 
 from plopcast.rss import RSSFeed, RSSItem
 
@@ -46,31 +45,38 @@ class Plopcast:
         sanitised_prefix = re.sub(INVALID_CHARACTERS, "", prefix)
         return f"{sanitised_prefix}.{file_suffix}"
 
-    def _tag_mp3(self, item: RSSItem, metadata: eyed3.AudioFile):
-        if metadata.tag is None:  # type: ignore
-            metadata.tag = Tag()
+    # def _tag_mp3(self, item: RSSItem, metadata: eyed3.AudioFile):
+    #     if metadata.tag is None:  # type: ignore
+    #         metadata.tag = Tag()
+    #     if self.album_tag:
+    #         metadata.tag.album = self.album_tag
+    #     if self.artist_tag:
+    #         metadata.tag.artist = self.artist_tag
+
+    #     if not metadata.tag.title:  # type: ignore
+    #         # Set a title if it's missing
+    #         metadata.tag.title = item.title
+
+    #     metadata.tag.save()  # type: ignore
+
+    def _tag_mp3(self, item: RSSItem, output_file: Path):
+        metadata = EasyID3(output_file)
+        if not metadata.get("title"):
+            metadata["title"] = item.title
         if self.album_tag:
-            metadata.tag.album = self.album_tag
+            metadata["album"] = self.album_tag
         if self.artist_tag:
-            metadata.tag.artist = self.artist_tag
+            metadata["artist"] = self.album_tag
 
-        if not metadata.tag.title:  # type: ignore
-            # Set a title if it's missing
-            metadata.tag.title = item.title
-
-        metadata.tag.save()  # type: ignore
+        metadata.save()  # type: ignore
 
     def tag_file(self, item: RSSItem, output_file: Path):
         """Set metadata tags and file attributes in the output file.
 
         FIXME: currently only supports mp3
         """
-        metadata = eyed3.load(output_file)  # type: ignore
-        if metadata is None:
-            print(f"Couldn't get metadata for {output_file}")
-            return
-
-        self._tag_mp3(item, metadata)
+        if output_file.suffix.lower() == ".mp3":
+            self._tag_mp3(item, output_file)
 
         if self.set_modification_time:
             mod_time = item.pub_date.timestamp()

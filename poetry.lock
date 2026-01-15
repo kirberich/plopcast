@@ -184,52 +184,6 @@ files = [
 ]
 
 [[package]]
-name = "deprecation"
-version = "2.1.0"
-description = "A library to handle automated deprecations"
-optional = false
-python-versions = "*"
-files = [
-    {file = "deprecation-2.1.0-py2.py3-none-any.whl", hash = "sha256:a10811591210e1fb0e768a8c25517cabeabcba6f0bf96564f8ff45189f90b14a"},
-    {file = "deprecation-2.1.0.tar.gz", hash = "sha256:72b3bde64e5d778694b0cf68178aed03d15e15477116add3fb773e581f9518ff"},
-]
-
-[package.dependencies]
-packaging = "*"
-
-[[package]]
-name = "eyed3"
-version = "0.9.9"
-description = "Python audio data toolkit (ID3 and MP3)"
-optional = false
-python-versions = "<4.0,>=3.10"
-files = [
-    {file = "eyed3-0.9.9-py3-none-any.whl", hash = "sha256:84c576c60c3e66b1be3d5c9ce942b690977692b91a19e4f55871f2956afc388c"},
-    {file = "eyed3-0.9.9.tar.gz", hash = "sha256:a8affaae19384aca66f6efef3babd705042a76e546f08e886f5f28691ac62a3b"},
-]
-
-[package.dependencies]
-deprecation = ">=2.1.0"
-filetype = ">=1.2.0"
-
-[package.extras]
-art-plugin = ["Pillow (>=11.3.0)", "pylast (>=5.5.0)", "requests (>=2.32.4)"]
-dev = ["Paver (>=1.3.4)", "Sphinx (>=7.4.7)", "cogapp (>=3.5)", "nicfit-py[cookiecutter] (>=0.8.7)", "regarding (>=0.2.0)", "sphinx-issues (>=5.0.1)", "sphinx-rtd-theme (>=3.0.2)", "twine (>=6.1.0)"]
-test = ["check-manifest (>=0.50)", "coverage (>=7.8.0)", "factory-boy (>=3.3.3)", "flake8 (>=7.2.0)", "pytest (>=8.3.5)", "pytest-cov (>=6.1.1)", "tox (>=4.25.0)"]
-yaml-plugin = ["PyYAML (>=6.0.2)"]
-
-[[package]]
-name = "filetype"
-version = "1.2.0"
-description = "Infer file type and MIME type of any file/buffer. No external dependencies."
-optional = false
-python-versions = "*"
-files = [
-    {file = "filetype-1.2.0-py2.py3-none-any.whl", hash = "sha256:7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"},
-    {file = "filetype-1.2.0.tar.gz", hash = "sha256:66b56cd6474bf41d8c54660347d37afcc3f7d1970648de365c102ef77548aadb"},
-]
-
-[[package]]
 name = "idna"
 version = "3.11"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -278,6 +232,17 @@ files = [
 ]
 
 [[package]]
+name = "mutagen"
+version = "1.47.0"
+description = "read and write audio tags for many formats"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "mutagen-1.47.0-py3-none-any.whl", hash = "sha256:edd96f50c5907a9539d8e5bba7245f62c9f520aef333d13392a79a4f70aca719"},
+    {file = "mutagen-1.47.0.tar.gz", hash = "sha256:719fadef0a978c31b4cf3c956261b3c58b6948b32023078a2117b1de09f0fc99"},
+]
+
+[[package]]
 name = "nodejs-wheel-binaries"
 version = "24.13.0"
 description = "unoffical Node.js package"
@@ -293,17 +258,6 @@ files = [
     {file = "nodejs_wheel_binaries-24.13.0-py2.py3-none-win_amd64.whl", hash = "sha256:605be4763e3ef427a3385a55da5a1bcf0a659aa2716eebbf23f332926d7e5f23"},
     {file = "nodejs_wheel_binaries-24.13.0-py2.py3-none-win_arm64.whl", hash = "sha256:2e3431d869d6b2dbeef1d469ad0090babbdcc8baaa72c01dd3cc2c6121c96af5"},
     {file = "nodejs_wheel_binaries-24.13.0.tar.gz", hash = "sha256:766aed076e900061b83d3e76ad48bfec32a035ef0d41bd09c55e832eb93ef7a4"},
-]
-
-[[package]]
-name = "packaging"
-version = "25.0"
-description = "Core utilities for Python packages"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "packaging-25.0-py3-none-any.whl", hash = "sha256:29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484"},
-    {file = "packaging-25.0.tar.gz", hash = "sha256:d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f"},
 ]
 
 [[package]]
@@ -605,4 +559,4 @@ zstd = ["backports-zstd (>=1.0.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">3.11,<4.0"
-content-hash = "eedf9173efb3ea13aa65523ec4161ffd5dc65d411d7d7135d4afcce65f165f33"
+content-hash = "f92636052d2072b6961e42b58d64f7271a74bfbf03efaf618f477bfeb3fc6475"
