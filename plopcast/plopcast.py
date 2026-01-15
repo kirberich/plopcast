@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 
 import eyed3
 import requests
+from eyed3.id3 import Tag
 
 from plopcast.rss import RSSFeed, RSSItem
 
@@ -46,6 +47,8 @@ class Plopcast:
         return f"{sanitised_prefix}.{file_suffix}"
 
     def _tag_mp3(self, item: RSSItem, metadata: eyed3.AudioFile):
+        if metadata.tag is None:  # type: ignore
+            metadata.tag = Tag()
         if self.album_tag:
             metadata.tag.album = self.album_tag
         if self.artist_tag:
