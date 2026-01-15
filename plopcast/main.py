@@ -27,6 +27,12 @@ def main(
     overwrite: Annotated[
         bool, typer.Option(help="Redownload and overwrite existing episodes")
     ] = False,
+    retag: Annotated[
+        bool,
+        typer.Option(
+            help="Reapply metadata tags and file attributes, even if file is already downloaded"
+        ),
+    ] = False,
     file_prefix_template: Annotated[
         str,
         typer.Option(
@@ -61,6 +67,7 @@ def main(
         album_tag=album_tag,
         artist_tag=artist_tag,
         overwrite=overwrite,
+        retag=retag,
         file_prefix_template=file_prefix_template,
         set_modification_time=set_modification_time,
     )

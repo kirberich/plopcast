@@ -27,6 +27,7 @@ class Plopcast:
     album_tag: str | None
     artist_tag: str | None
     overwrite: bool
+    retag: bool
     file_prefix_template: str
     set_modification_time: bool
 
@@ -57,7 +58,7 @@ class Plopcast:
         metadata.tag.save()  # type: ignore
 
     def tag_file(self, item: RSSItem, output_file: Path):
-        """Add missing metadata tags to the output file.
+        """Set metadata tags and file attributes in the output file.
 
         FIXME: currently only supports mp3
         """
@@ -67,6 +68,10 @@ class Plopcast:
             return
 
         self._tag_mp3(item, metadata)
+
+        if self.set_modification_time:
+            mod_time = item.pub_date.timestamp()
+            os.utime(output_file, (mod_time, mod_time))
 
     def download_episode(self, item: RSSItem, output_file: Path):
         print(f"Downloading {item.enclosure}...")
@@ -83,10 +88,6 @@ class Plopcast:
 
         # Fix any missing metadata
         self.tag_file(item, output_file)
-
-        if self.set_modification_time:
-            mod_time = item.pub_date.timestamp()
-            os.utime(output_file, (mod_time, mod_time))
 
     def check_episodes(self) -> Iterable[EpisodeCheck]:
         for index, item in enumerate(self.feed.items):
@@ -109,7 +110,7 @@ class Plopcast:
         """Download episodes, according to the given options."""
 
         for item, should_download, output_file, _ in self.check_episodes():
-            if not should_download:
-                continue
-
-            self.download_episode(item, output_file)
+            if should_download:
+                self.download_episode(item, output_file)
+            if should_download or self.retag and output_file.exists():
+                self.tag_file(item, output_file)
