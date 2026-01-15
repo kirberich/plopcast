@@ -4,7 +4,8 @@ from typing import Annotated
 import typer
 from rich import print
 
-from .media import check_episodes, download_episodes
+from plopcast.plopcast import Plopcast
+
 from .rss import get_rss_feed
 
 
@@ -16,6 +17,12 @@ def main(
         typer.Option(
             help="Maximum number of most recent episodes to fetch (Default is all episodes)"
         ),
+    ] = None,
+    album_tag: Annotated[
+        str | None, typer.Option(help="Album name to set in file metadata")
+    ] = None,
+    artist_tag: Annotated[
+        str | None, typer.Option(help="Artist name to set in file metadata")
     ] = None,
     overwrite: Annotated[
         bool, typer.Option(help="Redownload and overwrite existing episodes")
@@ -47,10 +54,19 @@ def main(
 ):
     feed = get_rss_feed(url)
 
+    plopcast = Plopcast(
+        feed=feed,
+        output_path=output_dir,
+        max_episodes=max_episodes,
+        album_tag=album_tag,
+        artist_tag=artist_tag,
+        overwrite=overwrite,
+        file_prefix_template=file_prefix_template,
+        set_modification_time=set_modification_time,
+    )
+
     if not quiet:
-        for item, should_download, output_file, reason in check_episodes(
-            feed, output_dir, max_episodes, overwrite, file_prefix_template
-        ):
+        for item, should_download, output_file, reason in plopcast.check_episodes():
             if should_download:
                 print(
                     f"[green]{reason.ljust(20)}[bold]{item.title}[/bold][/green] [bright_black]({output_file})[/bright_black]"
@@ -64,14 +80,7 @@ def main(
     if not output_dir.exists():
         output_dir.mkdir(parents=True)
 
-    download_episodes(
-        feed,
-        output_path=output_dir,
-        max_episodes=max_episodes,
-        overwrite=overwrite,
-        file_prefix_template=file_prefix_template,
-        set_modification_time=set_modification_time,
-    )
+    plopcast.download_episodes()
 
 
 def cli():

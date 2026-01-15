@@ -12,6 +12,20 @@ files = [
 ]
 
 [[package]]
+name = "basedpyright"
+version = "1.37.1"
+description = "static type checking for Python (but based)"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "basedpyright-1.37.1-py3-none-any.whl", hash = "sha256:caf3adfe54f51623241712f8b4367adb51ef8a8c2288e3e1ec4118319661340d"},
+    {file = "basedpyright-1.37.1.tar.gz", hash = "sha256:1f47bc6f45cbcc5d6f8619d60aa42128e4b38942f5118dcd4bc20c3466c5e02f"},
+]
+
+[package.dependencies]
+nodejs-wheel-binaries = ">=20.13.1"
+
+[[package]]
 name = "certifi"
 version = "2026.1.4"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -170,6 +184,52 @@ files = [
 ]
 
 [[package]]
+name = "deprecation"
+version = "2.1.0"
+description = "A library to handle automated deprecations"
+optional = false
+python-versions = "*"
+files = [
+    {file = "deprecation-2.1.0-py2.py3-none-any.whl", hash = "sha256:a10811591210e1fb0e768a8c25517cabeabcba6f0bf96564f8ff45189f90b14a"},
+    {file = "deprecation-2.1.0.tar.gz", hash = "sha256:72b3bde64e5d778694b0cf68178aed03d15e15477116add3fb773e581f9518ff"},
+]
+
+[package.dependencies]
+packaging = "*"
+
+[[package]]
+name = "eyed3"
+version = "0.9.9"
+description = "Python audio data toolkit (ID3 and MP3)"
+optional = false
+python-versions = "<4.0,>=3.10"
+files = [
+    {file = "eyed3-0.9.9-py3-none-any.whl", hash = "sha256:84c576c60c3e66b1be3d5c9ce942b690977692b91a19e4f55871f2956afc388c"},
+    {file = "eyed3-0.9.9.tar.gz", hash = "sha256:a8affaae19384aca66f6efef3babd705042a76e546f08e886f5f28691ac62a3b"},
+]
+
+[package.dependencies]
+deprecation = ">=2.1.0"
+filetype = ">=1.2.0"
+
+[package.extras]
+art-plugin = ["Pillow (>=11.3.0)", "pylast (>=5.5.0)", "requests (>=2.32.4)"]
+dev = ["Paver (>=1.3.4)", "Sphinx (>=7.4.7)", "cogapp (>=3.5)", "nicfit-py[cookiecutter] (>=0.8.7)", "regarding (>=0.2.0)", "sphinx-issues (>=5.0.1)", "sphinx-rtd-theme (>=3.0.2)", "twine (>=6.1.0)"]
+test = ["check-manifest (>=0.50)", "coverage (>=7.8.0)", "factory-boy (>=3.3.3)", "flake8 (>=7.2.0)", "pytest (>=8.3.5)", "pytest-cov (>=6.1.1)", "tox (>=4.25.0)"]
+yaml-plugin = ["PyYAML (>=6.0.2)"]
+
+[[package]]
+name = "filetype"
+version = "1.2.0"
+description = "Infer file type and MIME type of any file/buffer. No external dependencies."
+optional = false
+python-versions = "*"
+files = [
+    {file = "filetype-1.2.0-py2.py3-none-any.whl", hash = "sha256:7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"},
+    {file = "filetype-1.2.0.tar.gz", hash = "sha256:66b56cd6474bf41d8c54660347d37afcc3f7d1970648de365c102ef77548aadb"},
+]
+
+[[package]]
 name = "idna"
 version = "3.11"
 description = "Internationalized Domain Names in Applications (IDNA)"
@@ -215,6 +275,35 @@ python-versions = ">=3.7"
 files = [
     {file = "mdurl-0.1.2-py3-none-any.whl", hash = "sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8"},
     {file = "mdurl-0.1.2.tar.gz", hash = "sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"},
+]
+
+[[package]]
+name = "nodejs-wheel-binaries"
+version = "24.13.0"
+description = "unoffical Node.js package"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "nodejs_wheel_binaries-24.13.0-py2.py3-none-macosx_13_0_arm64.whl", hash = "sha256:356654baa37bfd894e447e7e00268db403ea1d223863963459a0fbcaaa1d9d48"},
+    {file = "nodejs_wheel_binaries-24.13.0-py2.py3-none-macosx_13_0_x86_64.whl", hash = "sha256:92fdef7376120e575f8b397789bafcb13bbd22a1b4d21b060d200b14910f22a5"},
+    {file = "nodejs_wheel_binaries-24.13.0-py2.py3-none-manylinux_2_28_aarch64.whl", hash = "sha256:3f619ac140e039ecd25f2f71d6e83ad1414017a24608531851b7c31dc140cdfd"},
+    {file = "nodejs_wheel_binaries-24.13.0-py2.py3-none-manylinux_2_28_x86_64.whl", hash = "sha256:dfb31ebc2c129538192ddb5bedd3d63d6de5d271437cd39ea26bf3fe229ba430"},
+    {file = "nodejs_wheel_binaries-24.13.0-py2.py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:fdd720d7b378d5bb9b2710457bbc880d4c4d1270a94f13fbe257198ac707f358"},
+    {file = "nodejs_wheel_binaries-24.13.0-py2.py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:9ad6383613f3485a75b054647a09f1cd56d12380d7459184eebcf4a5d403f35c"},
+    {file = "nodejs_wheel_binaries-24.13.0-py2.py3-none-win_amd64.whl", hash = "sha256:605be4763e3ef427a3385a55da5a1bcf0a659aa2716eebbf23f332926d7e5f23"},
+    {file = "nodejs_wheel_binaries-24.13.0-py2.py3-none-win_arm64.whl", hash = "sha256:2e3431d869d6b2dbeef1d469ad0090babbdcc8baaa72c01dd3cc2c6121c96af5"},
+    {file = "nodejs_wheel_binaries-24.13.0.tar.gz", hash = "sha256:766aed076e900061b83d3e76ad48bfec32a035ef0d41bd09c55e832eb93ef7a4"},
+]
+
+[[package]]
+name = "packaging"
+version = "25.0"
+description = "Core utilities for Python packages"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "packaging-25.0-py3-none-any.whl", hash = "sha256:29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484"},
+    {file = "packaging-25.0.tar.gz", hash = "sha256:d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f"},
 ]
 
 [[package]]
@@ -515,5 +604,5 @@ zstd = ["backports-zstd (>=1.0.0)"]
 
 [metadata]
 lock-version = "2.0"
-python-versions = ">3.11"
-content-hash = "fd191f6ceb78280517828fa1730db86759ee447d770aa5b6bc97efefa00ffdbc"
+python-versions = ">3.11,<4.0"
+content-hash = "eedf9173efb3ea13aa65523ec4161ffd5dc65d411d7d7135d4afcce65f165f33"

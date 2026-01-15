@@ -6,15 +6,19 @@ authors = ["Rob Kirberich <robert@kirberich.de>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">3.11"
+python = ">3.11,<4.0"
 requests = "^2.32.5"
 pydantic = "^2.12.5"
 pydantic-xml = "^2.18.0"
 click = "^8.3.1"
 typer = "^0.21.1"
+eyed3 = "^0.9.9"
 
 [tool.poetry.scripts]
 plopcast = "plopcast.main:cli"
+
+[tool.poetry.group.dev.dependencies]
+basedpyright = "^1.37.1"
 
 [build-system]
 requires = ["poetry-core"]
@@ -22,3 +26,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pyright]
 typeCheckingMode = "strict"
+reportUnknownMemberType = "information"
+reportMissingTypeStubs = "none"
