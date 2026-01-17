@@ -14,7 +14,7 @@ from plopcast.rss import RSSFeed, RSSItem
 
 # As people often save podcasts on fat32 file systems, we sanitise all filenames to not contain characters
 # which are invalid in fat32
-INVALID_CHARACTERS = r'\<|\>|\:|"|\/|\|\|\?\*'
+INVALID_CHARACTERS = r'\<|\>|\:|"|\/|\||\?|\*|’'
 
 EpisodeCheck = tuple[RSSItem, bool, Path, str]
 
