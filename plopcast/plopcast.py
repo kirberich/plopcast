@@ -9,6 +9,7 @@ from urllib.parse import urlparse
 
 import requests
 from mutagen.easyid3 import EasyID3
+from mutagen.id3._util import ID3NoHeaderError
 
 from plopcast.rss import RSSFeed, RSSItem
 
@@ -45,30 +46,21 @@ class Plopcast:
         sanitised_prefix = re.sub(INVALID_CHARACTERS, "", prefix)
         return f"{sanitised_prefix}.{file_suffix}"
 
-    # def _tag_mp3(self, item: RSSItem, metadata: eyed3.AudioFile):
-    #     if metadata.tag is None:  # type: ignore
-    #         metadata.tag = Tag()
-    #     if self.album_tag:
-    #         metadata.tag.album = self.album_tag
-    #     if self.artist_tag:
-    #         metadata.tag.artist = self.artist_tag
-
-    #     if not metadata.tag.title:  # type: ignore
-    #         # Set a title if it's missing
-    #         metadata.tag.title = item.title
-
-    #     metadata.tag.save()  # type: ignore
-
     def _tag_mp3(self, item: RSSItem, output_file: Path):
-        metadata = EasyID3(output_file)
+        try:
+            metadata = EasyID3(output_file)
+        except ID3NoHeaderError:
+            # No ID3 tag exists, so create one
+            metadata = EasyID3()
+
         if not metadata.get("title"):
             metadata["title"] = item.title
         if self.album_tag:
             metadata["album"] = self.album_tag
         if self.artist_tag:
-            metadata["artist"] = self.album_tag
+            metadata["artist"] = self.artist_tag
 
-        metadata.save()  # type: ignore
+        metadata.save(output_file)  # type: ignore
 
     def tag_file(self, item: RSSItem, output_file: Path):
         """Set metadata tags and file attributes in the output file.
